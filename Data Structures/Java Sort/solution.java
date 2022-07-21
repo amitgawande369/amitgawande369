@@ -20,7 +20,26 @@ class Student{
 		return cgpa;
 	}
 }
-
+class StudentCompare implements Comparator<Student>
+{
+    double epsilon = 0.001;
+    public int compare(Student s1, Student s2)
+    {
+        if(Math.abs(s1.getCgpa() - s2.getCgpa()) > epsilon)
+        {
+            return s1.getCgpa() < s2.getCgpa() ? 1 : -1;
+        }
+        else if(!s1.getFname().equals(s2.getFname()))
+        {
+            return s1.getFname().compareTo(s2.getFname());
+        }
+        else
+        {
+            //System.out.println( s1.getId() - s2.getId());
+            return s1.getId() - s2.getId();
+        }
+    }
+}
 //Complete the code
 public class Solution
 {
@@ -39,7 +58,7 @@ public class Solution
 			
 			testCases--;
 		}
-      
+      Collections.sort(studentList, new StudentCompare());
       	for(Student st: studentList){
 			System.out.println(st.getFname());
 		}
@@ -48,3 +67,4 @@ public class Solution
 
 
 
+//
